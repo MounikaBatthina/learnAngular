@@ -1,16 +1,18 @@
 <html ng-app = "mounaApp">
 <head>
+	<meta charset="utf-8">
 	<title>Html Starter</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	<script>
 		//Controller for mounaApp module
-		var mouna = angular.module('mounaApp',[]);
-		mounaApp.controller('NameCtrl', function($scope){
-			$scope.countries =[
-				{"name":"India","population":123456789}, //JSON object for Countries
-				{"name":"China","population":987654321},
-				{"name":"USA","population":5432167890}
-			];
+		var mounaApp = angular.module('mounaApp',[]);
+		mounaApp.controller('NameCtrl', function($scope, $http){
+			$http.get('countries.json').then(function(data){
+				$scope.countries = data.data;
+				//console.log(JSON.stringify($scope.countries));
+				
+			});
 		});
 	</script>
 </head>
