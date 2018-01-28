@@ -1,0 +1,43 @@
+<html ng-app = "mounaApp">
+<head>
+	<meta charset="utf-8">
+	<title>Html Starter</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+	<script>
+		//Controller for mounaApp module
+		var mounaApp = angular.module('mounaApp',['ngRoute']);
+
+		mounaApp.config(function($routeProvider){
+			$routeProvider.
+				when('/', {
+					template: '<h2>Countries</h2><ul><li ng-repeat="country in countries">{{country.name}}</li><ul>',
+					controller:'NameCtrl'
+				}).
+				when('/:countryName', {
+					template: '<h2> This is a page in detail about {{cn}}.</h2>',
+					controller:'CountryDetailCtrl'
+				}).
+				otherwise({
+					redirectTo:'/'
+				});
+		});
+	
+
+		mounaApp.controller('NameCtrl', function($scope, $http){
+			$http.get('countries.json').then(function(data){
+				$scope.countries = data.data;
+			});
+		});
+
+		mounaApp.controller('CountryDetailCtrl', function($scope,$routeParams){
+			$scope.cn = $routeParams.countryName;
+			console.log($scope.cn);
+		});
+	</script>
+</head>
+<body>
+	<div ng-view></div>	
+</body>
+</html>
