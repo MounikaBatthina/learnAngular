@@ -11,20 +11,19 @@
 			$http.get('countries.json').then(function(data){
 				$scope.countries = data.data;
 				//console.log(JSON.stringify($scope.countries));
-				$scope.sortField ='population';
-				$scope.reverse = true;
+				
 			});
 		});
 	</script>
 </head>
 <body ng-controller="NameCtrl">
-	Search <input type="text" ng-model="search"/>
+	Search: <input type="text" />
 	<table>
 		<tr>
-			<th><a href="" ng-click="sortField = 'name'; reverse=!reverse"> Country</a></th>
-			<th><a href="" ng-click="sortField ='population' ; reverse=!reverse">Population</a></th>
+			<th>Country</th>
+			<th>Population</th>
 		</tr>
-		<tr ng-repeat="country in countries | filter : search | orderBy:sortField:reverse ">
+		<tr ng-repeat="country in countries">
 			<td>{{country.name}}</td>
 			<td>{{country.population}}</td>
 		</tr>
