@@ -12,11 +12,11 @@
 		mounaApp.config(function($routeProvider){
 			$routeProvider.
 				when('/', {
-					template: '<h2>Countries</h2><ul><li ng-repeat="country in countries">{{country.name}}</li><ul>',
+					templateUrl: 'country-list.html',
 					controller:'NameCtrl'
 				}).
 				when('/:countryName', {
-					template: '<h2> This is a page in detail about {{cn}}.</h2>',
+					templateUrl: 'country-detail.html',
 					controller:'CountryDetailCtrl'
 				}).
 				otherwise({
